@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAG Voice Chatbot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Existing style link preserved but overridden by inline styles for the redesign -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">
+            <i class="fas fa-robot"></i>
+            RAG Assistant
+        </div>
+
+        <!-- New Chat & History -->
+        <div class="sidebar-section" style="gap: 0.5rem;">
+            <button class="btn btn-primary" onclick="startNewChat()" style="width: 100%;">
+                <i class="fas fa-plus"></i> New Chat
+            </button>
+        </div>
+
+        <div class="sidebar-section history-section" style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
+            <div class="section-title">Recent Chats</div>
+            <div id="historyList" class="history-list" style="overflow-y: auto; max-height: 400px;">
+                <!-- History items injected by JS -->
+            </div>
+        </div>
+
+        <div class="sidebar-section" id="trainingInfo">
+            <div class="section-title">System Status</div>
+            <div class="status-card">
+                <div class="status-row">
+                    <span>Training:</span>
+                    <span id="trainingStatus">Checking...</span>
+                </div>
+                <div style="margin-top: 0.75rem;">
+                    <button class="btn btn-light btn-sm reinit-btn" style="width: 100%" onclick="reinitializeBot()">
+                        <i class="fas fa-sync-alt"></i> Reinitialize
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="section-title">Knowledge Base</div>
+            <div class="file-upload-area">
+                <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #CBD5E1; margin-bottom: 1rem;"></i>
+                <input type="file" id="fileInput" accept=".pdf,.txt" multiple>
+                <button class="btn btn-primary upload-btn" style="width: 100%" onclick="uploadDocuments()">
+                    Upload & Learn
+                </button>
+                <div id="uploadStatus" style="margin-top: 0.5rem; font-size: 0.85rem;"></div>
+            </div>
+        </div>
+
+        <div class="sidebar-section" style="max-height: 150px; overflow: hidden; display: flex; flex-direction: column;">
+            <div class="section-title">Processing Log</div>
+            <div id="documentStatus">
+                <div id="statusContent">Waiting for documents...</div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Chat -->
+    <main class="chat-main">
+        <header class="chat-header">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 0;">
+                <button class="icon-btn" onclick="toggleSidebar()" style="width: 40px; height: 40px; font-size: 1.1rem; border: 1px solid var(--border-color); background: transparent; color: var(--text-secondary);" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div style="font-weight: 600; font-size: 1.1rem; margin-right: 0.5rem; white-space: nowrap;">Assistant</div>
+                
+                <!-- New Chat button in header for visibility when sidebar is closed -->
+                <button class="btn btn-light btn-sm" onclick="startNewChat()" title="New Chat">
+                    <i class="fas fa-plus"></i>
+                    <span style="display: inline-block;">New Chat</span>
+                </button>
+            </div>
+
+            <div class="header-status" id="status" style="margin-left: 1rem; flex-shrink: 0;">
+                <i class="fas fa-circle" style="font-size: 0.6rem; color: #10B981;"></i>
+                <span id="statusText">Ready to chat</span>
+            </div>
+        </header>
+
+        <div id="chatBox">
+            <div class="message bot">
+                <div class="message-header">
+                    <i class="fas fa-robot"></i> Assistant
+                </div>
+                <div class="message-content">
+                    Hello! I'm your <strong>pre-trained</strong> RAG Voice Assistant.<br><br>
+                    I can answer questions based on your documents, learn from new uploads, or just have a chat. Use the microphone to speak!
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-area">
+            <div class="input-group">
+                <button class="icon-btn voice-btn" id="voiceBtn" onclick="toggleVoiceRecognition()" title="Voice Input">
+                    <i class="fas fa-microphone"></i>
+                    <span id="voiceBtnText">Start Speaking</span>
+                </button>
+
+                <div class="text-input-wrapper">
+                    <input type="text" id="textInput" placeholder="Type a message..." autocomplete="off" onkeypress="if(event.key === 'Enter') sendMessage()">
+                </div>
+
+                <button class="icon-btn send-btn" onclick="sendMessage()" title="Send">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+</div>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
