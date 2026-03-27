@@ -1,5 +1,4 @@
-# Two-way-RAG
-[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/ambrose-kutti/Two-way-RAG)
+# 🗨️Two-way-RAG 🗣️
 
 An interactive Retrieval Augmented Generation (RAG) system with a voice-enabled web interface, powered by FastAPI, LangChain, and Ollama. This application allows you to build and chat with a knowledge base created from your own documents.
 
