@@ -221,7 +221,6 @@ class RAGChatbot:
             Respond naturally and very briefly to this general message: "{question}"
             Answer:"""
             return llm.invoke(prompt)
-
         # ============================================
         # 2. DOCUMENT-BASED Q&A (RAG)
         # ============================================
@@ -274,6 +273,7 @@ def text_to_speech(text: str) -> str:
     except Exception as e:
         print(f"TTS error: {e}")
         return ""
+        
 # =========================
 #  FASTAPI APP
 # =========================
@@ -282,6 +282,7 @@ chatbot = RAGChatbot()
 # Serve static files
 os.makedirs("static", exist_ok=True)
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
 # =========================
 #  API ENDPOINTS
 # =========================
