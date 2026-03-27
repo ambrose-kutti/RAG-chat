@@ -1,4 +1,3 @@
-
 // Speech recognition variables
 let recognition = null;
 let isListening = false;
@@ -24,7 +23,6 @@ if (SpeechRecognition) {
     recognition.continuous = false;
     recognition.interimResults = true;
     recognition.lang = 'en-US';
-
     recognition.onstart = function () {
         console.log("Voice recognition started");
         isListening = true;
@@ -36,7 +34,6 @@ if (SpeechRecognition) {
     recognition.onresult = function (event) {
         let finalTranscript = '';
         let interimTranscript = '';
-
         for (let i = event.resultIndex; i < event.results.length; i++) {
             const transcript = event.results[i][0].transcript;
             if (event.results[i].isFinal) {
@@ -56,7 +53,6 @@ if (SpeechRecognition) {
 
     recognition.onerror = function (event) {
         console.error("Speech recognition error:", event.error);
-
         if (event.error === 'not-allowed') {
             updateStatus(" Microphone access denied. Please allow permission.", 'error');
         } else if (event.error === 'no-speech') {
@@ -64,7 +60,6 @@ if (SpeechRecognition) {
         } else {
             updateStatus(" Speech recognition error: " + event.error, 'error');
         }
-
         stopListening();
     };
 
@@ -72,7 +67,6 @@ if (SpeechRecognition) {
         console.log("Voice recognition ended");
         if (isListening) {
             stopListening();
-
             // Auto-send if we have text
             if (textInput.value.trim()) {
                 setTimeout(() => {
@@ -92,7 +86,6 @@ if (SpeechRecognition) {
 function addMessage(text, isUser = false, messageType = 'general') {
     const div = document.createElement('div');
     div.className = `message ${isUser ? 'user' : 'bot'}`;
-
     if (!isUser) {
         if (messageType === 'trained') {
             div.classList.add('trained');
