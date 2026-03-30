@@ -1,7 +1,7 @@
 # 🗨️Two-way-RAG 🗣️
 
 An interactive Retrieval Augmented Generation (RAG) system with a voice-enabled web interface, powered by FastAPI, LangChain, and Ollama. This application allows you to build and chat with a knowledge base created from your own documents.
-
+(----star fork issue license logos)
 ## 📖 Overview 
 
 This project provides a complete, runnable RAG chatbot application. It features a modern web interface where users can interact with a Large Language Model (LLM) that has been augmented with information from a custom knowledge base. You can load documents into the system through a pre-trained data folder or by uploading them directly via the web UI.
@@ -17,6 +17,8 @@ The system uses a vector store to perform semantic searches on your documents, r
 -   **Voice Interaction**: Supports voice-to-text input using the browser's SpeechRecognition API and provides text-to-speech audio output for responses.
 -   **Chat History**:  Automatically saves and loads chat sessions using browser local storage.
 -   **Easy Initialization**: A "Reinitialize" feature allows you to rebuild the knowledge base from your pre-trained documents on the fly.
+
+## 🖥️ Screenshots
 
 ## 🛠️ Tech Stack
 
@@ -36,7 +38,7 @@ The system uses a vector store to perform semantic searches on your documents, r
 -   CSS3
 -   JavaScript
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 Follow these steps to set up and run the Two-way-RAG application on your local machine.
 
@@ -83,6 +85,20 @@ Follow these steps to set up and run the Two-way-RAG application on your local m
 6.  **Access the application:**
     Open your web browser and navigate to `http://localhost:8013`.
 
+
+## 📁 Project Structure
+
+```
+ambrose-kutti-two-way-rag/
+├── main.py                 # FastAPI application, RAG logic, and API endpoints
+├── requirements.txt        # Python package dependencies
+├── static/
+│   ├── css/style.css       # Styles for the web interface
+│   └── js/script.js        # Frontend logic, speech recognition, and API calls
+└── templates/
+    └── index.html          # The main HTML file for the user interface
+```
+
 ## ⚙️ How It Works
 
 The application operates through several key components:
@@ -100,20 +116,7 @@ The application operates through several key components:
 
 4.  **Interaction**: The frontend captures your input (text or speech), sends it to the FastAPI backend, and then displays the text response while playing the generated audio.
 
-## 📁 Project Structure
-
-```
-ambrose-kutti-two-way-rag/
-├── main.py                 # FastAPI application, RAG logic, and API endpoints
-├── requirements.txt        # Python package dependencies
-├── static/
-│   ├── css/style.css       # Styles for the web interface
-│   └── js/script.js        # Frontend logic, speech recognition, and API calls
-└── templates/
-    └── index.html          # The main HTML file for the user interface
-```
-
-## 📚 API Endpoints
+## 📚 API Reference
 
 The application exposes the following API endpoints:
 
@@ -133,3 +136,19 @@ Contributions are welcome! If you have suggestions for improvements or want to f
 4.  Commit your changes (`git commit -m 'Add some feature'`).
 5.  Push to the branch (`git push origin feature/YourFeature`).
 6.  Open a Pull Request.
+
+## 📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+LangChain: For providing an excellent framework for building LLM applications.
+Ollama: For enabling easy local LLM and embedding model deployment.
+ChromaDB: For the efficient and user-friendly vector database.
+FastAPI: For the modern, fast (high-performance) web framework.
+pypdf: For robust PDF document processing.
+
+##📞 Support & Contact
+🐛 Issues: GitHub Issues
+
+⭐ Star this repo if you find it helpful!
+Made with ❤️ by ambrose-kutti
