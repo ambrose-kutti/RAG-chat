@@ -1,7 +1,7 @@
 # 🗨️Two-way-RAG 🗣️
 
 An interactive Retrieval Augmented Generation (RAG) system with a voice-enabled web interface, powered by FastAPI, LangChain, and Ollama. This application allows you to build and chat with a knowledge base created from your own documents.
-(----star fork issue license logos)
+
 ## 📖 Overview 
 
 This project provides a complete, runnable RAG chatbot application. It features a modern web interface where users can interact with a Large Language Model (LLM) that has been augmented with information from a custom knowledge base. You can load documents into the system through a pre-trained data folder or by uploading them directly via the web UI.
@@ -147,8 +147,5 @@ ChromaDB: For the efficient and user-friendly vector database.
 FastAPI: For the modern, fast (high-performance) web framework.
 pypdf: For robust PDF document processing.
 
-##📞 Support & Contact
-🐛 Issues: GitHub Issues
+## 📞 Support & Contact
 
-⭐ Star this repo if you find it helpful!
-Made with ❤️ by ambrose-kutti
