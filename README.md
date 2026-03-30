@@ -36,6 +36,14 @@ The system uses a vector store to perform semantic searches on your documents, r
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
+
+**Backend:**
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Uvicorn](https://img.shields.io/badge/Uvicorn-FF6200?style=for-the-badge&logo=uvicorn&logoColor=white)](https://www.uvicorn.org/)
+[![python-dotenv](https://img.shields.io/badge/python--dotenv-lightgreen?style=for-the-badge&logo=dotenv&logoColor=white)](https://github.com/theskumar/python-dotenv)
+
+
 **Backend:**
 -   Python
 -   FastAPI
