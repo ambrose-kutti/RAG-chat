@@ -42,7 +42,7 @@ The system uses a vector store to perform semantic searches on your documents, r
 [![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![LangChain](https://img.shields.io/badge/LangChain-FF6200?style=for-the-badge&logo=langchain&logoColor=white)](https://www.langchain.org/)
 [![Ollama](https://img.shields.io/badge/ollama-lightpink?style=for-the-badge&logo=ollama&logoColor=white)](https://www.ollama.org/)
-
+[![gTTS](https://img.shields.io/badge/gtts-green?style=for-the-badge&logo=gtts&logoColor=white)](https://www.gtts.org/)
 
 **Backend:**
 -   Python
