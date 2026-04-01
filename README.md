@@ -161,3 +161,14 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Support & Contact
 
+-   🐛 Issues: [GitHub Issues](https://github.com/ambrose-kutti/Two-way-RAG/issues)
+
+---
+
+<div align="center">
+
+**⭐ Star this repo if you find it helpful!**
+
+Made with ❤️ by [ambrose-kutti](https://github.com/ambrose-kutti)
+
+</div>
