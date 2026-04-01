@@ -1,3 +1,4 @@
+
 // Speech recognition variables
 let recognition = null;
 let isListening = false;
@@ -10,10 +11,6 @@ const voiceBtnText = document.getElementById('voiceBtnText');
 const status = document.getElementById('status');
 const statusText = document.getElementById('statusText');
 const uploadStatus = document.getElementById('uploadStatus');
-const documentStatus = document.getElementById('documentStatus');
-const statusContent = document.getElementById('statusContent');
-const trainingInfo = document.getElementById('trainingInfo');
-const trainingStatus = document.getElementById('trainingStatus');
 
 // Check browser support
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -23,6 +20,7 @@ if (SpeechRecognition) {
     recognition.continuous = false;
     recognition.interimResults = true;
     recognition.lang = 'en-US';
+
     recognition.onstart = function () {
         console.log("Voice recognition started");
         isListening = true;
@@ -34,6 +32,7 @@ if (SpeechRecognition) {
     recognition.onresult = function (event) {
         let finalTranscript = '';
         let interimTranscript = '';
+
         for (let i = event.resultIndex; i < event.results.length; i++) {
             const transcript = event.results[i][0].transcript;
             if (event.results[i].isFinal) {
@@ -53,6 +52,7 @@ if (SpeechRecognition) {
 
     recognition.onerror = function (event) {
         console.error("Speech recognition error:", event.error);
+
         if (event.error === 'not-allowed') {
             updateStatus(" Microphone access denied. Please allow permission.", 'error');
         } else if (event.error === 'no-speech') {
@@ -60,6 +60,7 @@ if (SpeechRecognition) {
         } else {
             updateStatus(" Speech recognition error: " + event.error, 'error');
         }
+
         stopListening();
     };
 
@@ -67,6 +68,7 @@ if (SpeechRecognition) {
         console.log("Voice recognition ended");
         if (isListening) {
             stopListening();
+
             // Auto-send if we have text
             if (textInput.value.trim()) {
                 setTimeout(() => {
@@ -86,6 +88,7 @@ if (SpeechRecognition) {
 function addMessage(text, isUser = false, messageType = 'general') {
     const div = document.createElement('div');
     div.className = `message ${isUser ? 'user' : 'bot'}`;
+
     if (!isUser) {
         if (messageType === 'trained') {
             div.classList.add('trained');
@@ -278,17 +281,6 @@ async function uploadDocuments() {
             uploadStatus.textContent = `✅ ${result.message}`;
             uploadStatus.className = 'upload-status success';
 
-            // Update document status display
-            documentStatus.classList.add('show');
-            statusContent.innerHTML = `
-                            <strong><i class="fas fa-check-circle"></i> Document Learned!</strong>
-                            <div style="margin-top: 10px;">
-                                <strong>File:</strong> ${result.filename}<br>
-                                <strong>Pages:</strong> ${result.num_pages}<br>
-                                <strong>Preview:</strong> ${result.preview}
-                            </div>
-                        `;
-
             // Add system message to chat
             const systemMsg = document.createElement('div');
             systemMsg.className = 'message bot uploaded';
@@ -322,85 +314,11 @@ async function uploadDocuments() {
     fileInput.value = '';
 }
 
-// Reinitialize bot
-async function reinitializeBot() {
-    try {
-        updateStatus(" Reinitializing with training data...", 'processing');
-
-        const response = await fetch('/reinitialize', {
-            method: 'POST'
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            updateStatus(" Reinitialized successfully!", 'ready');
-
-            // Update training status
-            trainingStatus.innerHTML = `
-                            Trained on <strong>${result.training_files.length}</strong> files: 
-                            ${result.training_files.join(', ')}
-                        `;
-
-            // Add system message
-            const systemMsg = document.createElement('div');
-            systemMsg.className = 'message bot trained';
-            systemMsg.innerHTML = `
-                            <div class="message-header">
-                                <span><i class="fas fa-robot"></i> System</span>
-                                <span class="training-indicator">Reinitialized</span>
-                            </div>
-                            Reinitialized with training data! I'm now working with ${result.training_files.length} training files.
-                        `;
-            chatBox.appendChild(systemMsg);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-    } catch (error) {
-        console.error("Reinitialization error:", error);
-        updateStatus(" Reinitialization failed", 'error');
-    }
-}
-
-// Check document status on load
-async function checkDocumentStatus() {
-    try {
-        const response = await fetch('/document-status');
-        const result = await response.json();
-
-        // Update training info
-        trainingStatus.innerHTML = `
-                        ${result.training_file_count} training files | ${result.document_count} uploaded files
-                    `;
-
-        if (result.has_documents && (result.document_count > 0 || result.training_file_count > 0)) {
-            documentStatus.classList.add('show');
-
-            let content = `<strong><i class="fas fa-database"></i> Knowledge Base</strong><div style="margin-top: 10px;">`;
-
-            if (result.training_file_count > 0) {
-                content += `<strong>Training Files (${result.training_file_count}):</strong> ${result.training_files.join(', ')}<br>`;
-            }
-
-            if (result.document_count > 0) {
-                content += `<strong>Uploaded Files (${result.document_count}):</strong> ${result.documents.join(', ')}`;
-            }
-
-            content += `</div>`;
-            statusContent.innerHTML = content;
-        }
-    } catch (error) {
-        console.log("Could not check document status:", error);
-        trainingStatus.textContent = "Error checking status";
-    }
-}
-
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Pre-trained RAG Voice Chatbot Ready");
     textInput.focus();
 
-    // Check document status
-    checkDocumentStatus();
     renderHistoryList();
 
     // Auto-focus on input when clicking
@@ -424,14 +342,14 @@ let currentSessionId = null;
 function renderHistoryList() {
     const historyList = document.getElementById('historyList');
     if (!historyList) return;
-    
+
     historyList.innerHTML = '';
-    
+
     if (chatHistory.length === 0) {
         historyList.innerHTML = '<div style="padding: 1rem; color: #9CA3AF; font-size: 0.8rem; text-align: center;">No previous chats</div>';
         return;
     }
-    
+
     chatHistory.forEach(session => {
         const div = document.createElement('div');
         div.className = `history-item ${session.id === currentSessionId ? 'active' : ''}`;
@@ -464,11 +382,11 @@ function saveChatToStorage(role, text, type = 'general') {
     if (session) {
         session.messages.push({ role, text, type, timestamp: Date.now() });
         session.timestamp = Date.now();
-        
+
         // Move to top of list
         chatHistory = chatHistory.filter(s => s.id !== currentSessionId);
         chatHistory.unshift(session);
-        
+
         localStorage.setItem('rag_chat_history', JSON.stringify(chatHistory));
         renderHistoryList();
     }
@@ -477,25 +395,25 @@ function saveChatToStorage(role, text, type = 'general') {
 function loadSession(sessionId) {
     const session = chatHistory.find(s => s.id === sessionId);
     if (!session) return;
-    
+
     currentSessionId = sessionId;
     const chatBox = document.getElementById('chatBox');
     chatBox.innerHTML = '';
-    
+
     session.messages.forEach(msg => {
         addMessage(msg.text, msg.role === 'user', msg.type);
     });
-    
+
     renderHistoryList(); // Ensure "active" class updates
 }
 
 function startNewChat() {
     currentSessionId = null;
     renderHistoryList();
-    
+
     const chatBox = document.getElementById('chatBox');
     chatBox.innerHTML = '';
-    
+
     const div = document.createElement('div');
     div.className = 'message bot';
     div.innerHTML = `
@@ -510,12 +428,12 @@ function startNewChat() {
 
 function deleteSession(sessionId, event) {
     if (event) event.stopPropagation(); // Prevent loading the session
-    
+
     if (!confirm('Are you sure you want to delete this chat?')) return;
-    
+
     chatHistory = chatHistory.filter(s => s.id !== sessionId);
     localStorage.setItem('rag_chat_history', JSON.stringify(chatHistory));
-    
+
     if (currentSessionId === sessionId) {
         startNewChat();
     } else {
