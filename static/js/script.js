@@ -49,7 +49,6 @@ if (SpeechRecognition) {
 
     recognition.onerror = function (event) {
         console.error("Speech recognition error:", event.error);
-
         if (event.error === 'not-allowed') {
             updateStatus(" Microphone access denied. Please allow permission.", 'error');
         } else if (event.error === 'no-speech') {
@@ -57,7 +56,6 @@ if (SpeechRecognition) {
         } else {
             updateStatus(" Speech recognition error: " + event.error, 'error');
         }
-
         stopListening();
     };
 
@@ -65,7 +63,6 @@ if (SpeechRecognition) {
         console.log("Voice recognition ended");
         if (isListening) {
             stopListening();
-
             // Auto-send if we have text
             if (textInput.value.trim()) {
                 setTimeout(() => {
@@ -104,7 +101,6 @@ function addMessage(text, isUser = false, messageType = 'general') {
         } else {
             indicator = `<span class="document-indicator">General Chat</span>`;
         }
-
         header = `<div class="message-header">
                                 <span><i class="fas fa-robot"></i> Assistant</span>
                                 ${indicator}
@@ -114,7 +110,6 @@ function addMessage(text, isUser = false, messageType = 'general') {
                                 <span><i class="fas fa-user"></i> You</span>
                               </div>`;
     }
-
     div.innerHTML = header + text;
     chatBox.appendChild(div);
     chatBox.scrollTop = chatBox.scrollHeight;
