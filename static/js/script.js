@@ -1,4 +1,3 @@
-
 // Speech recognition variables
 let recognition = null;
 let isListening = false;
@@ -32,7 +31,6 @@ if (SpeechRecognition) {
     recognition.onresult = function (event) {
         let finalTranscript = '';
         let interimTranscript = '';
-
         for (let i = event.resultIndex; i < event.results.length; i++) {
             const transcript = event.results[i][0].transcript;
             if (event.results[i].isFinal) {
@@ -41,7 +39,6 @@ if (SpeechRecognition) {
                 interimTranscript += transcript;
             }
         }
-
         // Update input with recognized text
         if (finalTranscript) {
             textInput.value = finalTranscript;
