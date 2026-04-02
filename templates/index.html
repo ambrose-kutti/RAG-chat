@@ -16,21 +16,18 @@
             <i class="fas fa-robot"></i>
             RAG Assistant
         </div>
-
         <!-- New Chat & History -->
         <div class="sidebar-section" style="gap: 0.5rem;">
             <button class="btn btn-primary" onclick="startNewChat()" style="width: 100%;">
                 <i class="fas fa-plus"></i> New Chat
             </button>
         </div>
-
         <div class="sidebar-section history-section" style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
             <div class="section-title">Recent Chats</div>
             <div id="historyList" class="history-list" style="overflow-y: auto; max-height: 400px;">
                 <!-- History items injected by JS -->
             </div>
         </div>
-
 
         <div class="sidebar-section">
             <div class="section-title">Upload Files</div>
@@ -43,7 +40,6 @@
                 <div id="uploadStatus" style="margin-top: 0.5rem; font-size: 0.85rem;"></div>
             </div>
         </div>
-
     </aside>
 
     <!-- Main Chat -->
@@ -67,7 +63,7 @@
                 <span id="statusText">Ready to chat</span>
             </div>
         </header>
-
+        
         <div id="chatBox">
             <div class="message bot">
                 <div class="message-header">
