@@ -254,13 +254,11 @@ async function uploadDocuments() {
             method: 'POST',
             body: singleFormData
         });
-
         const result = await response.json();
 
         if (result.success) {
             uploadStatus.textContent = `✅ ${result.message}`;
             uploadStatus.className = 'upload-status success';
-
             // Add system message to chat
             const systemMsg = document.createElement('div');
             systemMsg.className = 'message bot uploaded';
@@ -274,22 +272,18 @@ async function uploadDocuments() {
                         `;
             chatBox.appendChild(systemMsg);
             chatBox.scrollTop = chatBox.scrollHeight;
-
             updateStatus(" New document learned! Ask questions about it.", 'ready');
-
         } else {
             uploadStatus.textContent = ` Upload failed: ${result.detail || 'Unknown error'}`;
             uploadStatus.className = 'upload-status error';
             updateStatus(" Upload failed", 'error');
         }
-
     } catch (error) {
         console.error("Upload error:", error);
         uploadStatus.textContent = " Upload failed. Please try again.";
         uploadStatus.className = 'upload-status error';
         updateStatus(" Upload failed", 'error');
     }
-
     // Clear file input
     fileInput.value = '';
 }
@@ -298,9 +292,7 @@ async function uploadDocuments() {
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Pre-trained RAG Voice Chatbot Ready");
     textInput.focus();
-
     renderHistoryList();
-
     // Auto-focus on input when clicking
     document.addEventListener('click', () => {
         textInput.focus();
@@ -322,9 +314,7 @@ let currentSessionId = null;
 function renderHistoryList() {
     const historyList = document.getElementById('historyList');
     if (!historyList) return;
-
     historyList.innerHTML = '';
-
     if (chatHistory.length === 0) {
         historyList.innerHTML = '<div style="padding: 1rem; color: #9CA3AF; font-size: 0.8rem; text-align: center;">No previous chats</div>';
         return;
@@ -362,11 +352,9 @@ function saveChatToStorage(role, text, type = 'general') {
     if (session) {
         session.messages.push({ role, text, type, timestamp: Date.now() });
         session.timestamp = Date.now();
-
         // Move to top of list
         chatHistory = chatHistory.filter(s => s.id !== currentSessionId);
         chatHistory.unshift(session);
-
         localStorage.setItem('rag_chat_history', JSON.stringify(chatHistory));
         renderHistoryList();
     }
@@ -375,15 +363,12 @@ function saveChatToStorage(role, text, type = 'general') {
 function loadSession(sessionId) {
     const session = chatHistory.find(s => s.id === sessionId);
     if (!session) return;
-
     currentSessionId = sessionId;
     const chatBox = document.getElementById('chatBox');
     chatBox.innerHTML = '';
-
     session.messages.forEach(msg => {
         addMessage(msg.text, msg.role === 'user', msg.type);
     });
-
     renderHistoryList(); // Ensure "active" class updates
 }
 
