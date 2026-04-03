@@ -1,4 +1,4 @@
-# 🗨️Two-way-RAG 🗣️
+# 🗨️Two-Way-RAG 🗣️
 
 An interactive Retrieval Augmented Generation (RAG) system with a voice-enabled web interface, powered by FastAPI, LangChain, and Ollama. This application allows you to build and chat with a knowledge base created from your own documents.
 
