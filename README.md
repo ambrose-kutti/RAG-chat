@@ -140,7 +140,7 @@ The application operates through several key components:
 4.  **Interaction**: The frontend captures your input (text or speech), sends it to the FastAPI backend, and then displays the text response while playing the generated audio.
 
 ## 📚 API Reference
-
+ 
 The application exposes the following API endpoints:
 
 -   `GET /`: Serves the main web interface.
