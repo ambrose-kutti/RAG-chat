@@ -7,7 +7,7 @@ An interactive Retrieval Augmented Generation (RAG) system with a voice-enabled 
 [![GitHub stars](https://img.shields.io/github/stars/ambrose-kutti/UI-Based-RAG?style=for-the-badge)](https://github.com/ambrose-kutti/UI-Based-RAG/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/ambrose-kutti/UI-Based-RAG?style=for-the-badge)](https://github.com/ambrose-kutti/UI-Based-RAG/network)
 [![GitHub issues](https://img.shields.io/github/issues/ambrose-kutti/UI-Based-RAG?style=for-the-badge)](https://github.com/ambrose-kutti/UI-Based-RAG/issues)
-[![GitHub license](https://img.shields.io/github/license/ambrose-kutti/n8n-news-digest?style=for-the-badge)](https://github.com/ambrose-kutti/n8n-news-digest/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/ambrose-kutti/n8n-news-digest?style=for-the-badge)](https://github.com/ambrose-kutti/n8n-news-digest/LICENSE) 
 </div>
 
 ## 📖 Overview 
