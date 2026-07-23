@@ -252,7 +252,7 @@ class RAGChatbot:
 #  TEXT-TO-SPEECH
 # =========================
 def text_to_speech(text: str) -> str:
-    #"""Convert text to speech audio"""
+    #Convert text to speech audio
     if not TTS_AVAILABLE:
         return ""
     try:
