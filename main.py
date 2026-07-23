@@ -239,8 +239,7 @@ class RAGChatbot:
                                      - If the question is specific but unrelated to the context, say: "I don't have information about that in my documents."
                                      - NEVER mention any filenames, document names, or source references in your answer.
                                     
-                                    Answer:
-                                    """,
+                                    Answer:""",
                     return llm.invoke(prompt)
                 else:
                     return "I don't have information about that in my documents."
@@ -253,7 +252,7 @@ class RAGChatbot:
 #  TEXT-TO-SPEECH
 # =========================
 def text_to_speech(text: str) -> str:
-    """Convert text to speech audio"""
+    #"""Convert text to speech audio"""
     if not TTS_AVAILABLE:
         return ""
     try:
@@ -281,7 +280,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # =========================
 @app.post("/upload-document")
 async def upload_document(file: UploadFile = File(...)):
-    """Upload and process document"""
+    #Upload and process document
     if not DOCUMENT_AVAILABLE:
         raise HTTPException(
             status_code=400,
@@ -311,7 +310,7 @@ async def upload_document(file: UploadFile = File(...)):
 
 @app.post("/reinitialize")
 async def reinitialize():
-    """Reinitialize chatbot with current training data"""
+    #"""Reinitialize chatbot with current training data"""
     chatbot.initialize_vector_store()
     txt_files = []    # Count training files
     if os.path.exists(PRE_TRAINED_DATA_DIR):
@@ -325,7 +324,7 @@ async def reinitialize():
 
 @app.post("/chat")
 async def chat(question: str = Form(...)):
-    """Main chat endpoint with RAG"""
+    #"""Main chat endpoint with RAG"""
     answer = chatbot.get_response(question)    # Get response from chatbot
     # Generate speech
     audio_base64 = text_to_speech(answer)
@@ -338,7 +337,7 @@ async def chat(question: str = Form(...)):
 
 @app.get("/document-status")
 async def document_status():
-    """Check document status including training data"""
+    #"""Check document status including training data"""
     has_documents = chatbot.vector_store is not None
     doc_files = []    # Count files in documents directory
     if os.path.exists(DOCUMENTS_DIR):
